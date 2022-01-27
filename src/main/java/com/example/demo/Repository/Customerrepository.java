@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.demo.Customerdetails;
 
 
-
 public interface Customerrepository extends CrudRepository<Customerdetails, Integer>{
 
 }
