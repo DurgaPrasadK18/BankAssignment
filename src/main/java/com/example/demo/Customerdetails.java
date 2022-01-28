@@ -1,22 +1,22 @@
 package com.example.demo;
 
-
-import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
+
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.sun.istack.NotNull;
+
 
 @Entity
-@Table(name="Customer")
+
 public class Customerdetails {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -31,35 +31,35 @@ public class Customerdetails {
 	
 	@NotBlank
 	@Size(max=25)
-	private String Customername;
-	public String getCustomername() {
-		return Customername;
+	private String name;
+	public String getName() {
+		return name;
 	}
 
-	public void setCustomername(String customername) {
-		Customername = customername;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	@NotBlank
-	private String Gender;
-	public String getGender() {
-		return Gender;
+	private String gender;
+	public String isGender() {
+		return gender;
 	}
-
 	public void setGender(String gender) {
-		Gender = gender;
+		this.gender = gender;
+	}
+	@NotBlank
+	@NotNull
+	@Pattern(regexp = "^(([0-9])|([0-2][0-9])|([3][0-1]))\\-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\-\\d{4}$")
+	private String dob;
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
 	
-	@NotEmpty
-	@DateTimeFormat(pattern= "DD-MON-YY")
-	private Date DOB;
-	public Date getDOB() {
-		return DOB;
-	}
-
-	public void setDOB(Date dOB) {
-		DOB = dOB;
-	}
+	
 	@NotBlank
     @Size(max=50)
 	private String address;
@@ -86,51 +86,53 @@ public class Customerdetails {
 	
 	@NotBlank
 	@Size(max=25)
-	private String State;
+	private String state;
 	public String getState() {
-		return State;
+		return state;
 	}
 
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	} 
-	
-	
+	@NotBlank
 	@Size(max=7)
-	private int pin;
+	@Pattern(regexp = "[0-9 ]+")
+	private String pin;
 	
-	public int getPin() {
+	public String getPin() {
 		return pin;
 	}
 
-	public void setPin(int pin) {
+	public void setPin(String pin) {
 		this.pin = pin;
 	}
-	
+	@NotBlank
+	@Pattern(regexp = "[0-9 ]+")
     @Size(max=15)
-	private String Telephone_no;
+	private String telephone_no;
     public String getTelephone_no() {
-		return Telephone_no;
+		return telephone_no;
 	}
 
 	public void setTelephone_no(String telephone_no) {
-		Telephone_no = telephone_no;
+		this.telephone_no = telephone_no;
 	}
     
-    
-	private String Fax;
+	@NotBlank
+	private String fax;
 	public String getFax() {
-		return Fax;
+		return fax;
 	}
 
 	public void setFax(String fax) {
-		Fax = fax;
+		this.fax = fax;
 	}
 	
 	
+	@NotNull
 	@NotBlank
-	@Size(max=30)
-	@Pattern(regexp="^[0-9 a-z A-Z ]+ @[0-9 a-z A-Z .-]+$")
+	@Size(max = 30)
+	@Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
 	private String email;
 	public String getEmail() {
 		return email;
