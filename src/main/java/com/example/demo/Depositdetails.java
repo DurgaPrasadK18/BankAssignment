@@ -16,13 +16,13 @@ public class Depositdetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@NotBlank(message = "Account no. is required")
-	@Size(max = 10, message = "Account number should not be greater than 10")
+	@NotBlank
+	@Size(max = 10)
 	@Pattern(regexp = "^[0-9]+$")
 	private int Account_Number;
 
-	@NotBlank(message = "Enter an amount")
-	@Range(min = 1, message = "You should enter an amount greater than 0")
+	@NotBlank
+	@Range(min = 1)
 	@Pattern(regexp = "^[0-9]+.[0-9][0-9]$")
 	private int amount;
 
