@@ -3,10 +3,9 @@ package com.example.demo.Repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.Depositdetails;
-
+import com.example.demo.entity.Accountdetails;
 
 @Repository
-public interface Depositrepository extends CrudRepository<Depositdetails, Integer> {
+public interface Accountrepository extends CrudRepository<Accountdetails, Integer> {
 
 }

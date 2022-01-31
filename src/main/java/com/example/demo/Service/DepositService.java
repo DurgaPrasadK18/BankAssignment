@@ -1,34 +1,35 @@
 package com.example.demo.Service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Depositdetails;
+import com.example.demo.Repository.Customerrepository;
 import com.example.demo.Repository.Depositrepository;
+import com.example.demo.entity.Customerdetails;
+import com.example.demo.entity.Depositdetails;
 
 @Service
 public class DepositService {
+
+	@Autowired
+	private Depositrepository depositRepository;
+	@Autowired
+	private Customerrepository customerRepository;
 	
-@Autowired
-Depositrepository depositRepository;
-
-public void saveDeposit(Depositdetails deposit) {
-	depositRepository.save(deposit);
-}
-
-public Iterable<Depositdetails> getDeposit() {
-	// TODO Auto-generated method stub
-	return depositRepository.findAll();
-}
-
-public Optional<Depositdetails> getCustomers(Integer id) {
-	return depositRepository.findById(id);
-}
-
-public void deleteDeposit(Integer id) {
-	// TODO Auto-generated method stub
-	depositRepository.deleteById(id);
-}
+	public void addDeposit(Depositdetails deposit, Integer id) {
+		
+		Customerdetails customer = customerRepository.findById(id).get();
+		
+		Double initial_amount = customer.getDeposit().getAmount();
+		Double total_amount = initial_amount + deposit.getAmount();
+		
+		Depositdetails depositfinal = customer.getDeposit();
+		depositfinal.setAmount(total_amount);
+		
+		
+		depositRepository.save(depositfinal);
+		customer.setDeposit(depositfinal);
+		customerRepository.save(customer);
+	}
+	
 }

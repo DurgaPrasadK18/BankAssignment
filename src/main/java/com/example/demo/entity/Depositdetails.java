@@ -1,62 +1,51 @@
-package com.example.demo;
+package com.example.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
 @Entity
+@Table(name = "deposit")
 public class Depositdetails {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@Column(name = "deposit_id")
+	private Integer depoid;
 	
 	@Pattern(regexp = "[0-9 ]+")
 	@Size(max = 10)
 	@NotBlank
 	@NotNull
-	private String accountnumber;
-
-	//@NotNull 
-	@Min(value=1)
-	private double amount;
-
-	private String description;
-
-	public String getAccountNumber() {
-		return accountnumber;
+	private String accountnum;
+	
+	@NotBlank 
+	@Pattern(regexp = "^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$")
+	private Double amount;
+	
+	public Depositdetails(Integer depoId, String accountnum) {
 	}
-
-	public void setAccountNumber(String accountnumber) {
-		this.accountnumber = accountnumber;
+	
+	public String getAccountnum() {
+		return accountnum;
 	}
-
+	public void setAccountnum(String accountnum) {
+		this.accountnum = accountnum;
+	}
 	public Double getAmount() {
 		return amount;
 	}
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
+		
 }
